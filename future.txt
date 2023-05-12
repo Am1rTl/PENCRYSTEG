@@ -1,0 +1,32 @@
+os.system("gnome-terminal -e 'bash -c \"dirb; exec bash\"'")
+for open new terminal with work command
+
+
+
+    Nmap
+    Nikto
+    OpenVAS
+    Vega
+    Arachni
+    Wapiti
+    OWASP ZAP
+    Skipfish
+    Lynis
+    Aircrack-ng
+    wpscan
+
+
+    Nmap - a powerful network scanner that can be used to discover hosts and services on a network.
+    Nikto - a web server scanner which can search for various vulnerabilities such as outdated software, misconfigured servers, and more.
+    OpenVAS - a framework of several services and tools offering a comprehensive and powerful vulnerability scanning and management solution.
+    Lynis - an open-source security auditing tool that checks various security aspects of a Linux machine.
+    OWASP ZAP - a web application security scanner that can find vulnerabilities such as SQL injection, cross-site scripting (XSS), and more.
+    Wapiti - a web application vulnerability scanner that can search for vulnerabilities such as File Disclosure, SQL Injection, Backup Files Analysis, etc.
+    Arachni - a feature-full, modular, high-performance Ruby framework aimed towards helping penetration testers and administrators evaluate web applications’ security.
+    Vega - an open-source web security scanner and testing platform that can be used to find SQL injection, XSS, and other vulnerabilities in web applications.
+    Nikto2 - an updated version of Nikto which includes new features and fixes.
+    Skipfish - a web application security scanner that can identify vulnerabilities such as SQL injection and Cross-Site Scripting.
+
+
+Osint:
+	DetectDee
