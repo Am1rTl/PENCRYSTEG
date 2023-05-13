@@ -30,3 +30,6 @@ for open new terminal with work command
 
 Osint:
 	DetectDee
+	https://github.com/wddadk/OSINT-Tools
+
+

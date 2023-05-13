@@ -2,6 +2,13 @@ import os
 import random
 
 def req():
+	os.system("sudo apt update")
+	os.system("sudo apt upgrage")
+	os.system("sudo apt-get update")
+
+	os.system("sudo apt-get dist-upgrade")
+
+
 	os.system("pip install random2")
 	os.system("sudo apt install git")
 	os.system("git clone https://github.com/s0md3v/XSStrike.git")
@@ -12,6 +19,7 @@ def req():
 	os.system("sudo apt install burpsuite")
 	os.system("sudo apt install chromium")
 	os.system("sudo apt install dirb")
+	os.system("sudo apt install openvas")
 
 	os.system("sudo apt autoremove")
 
@@ -123,9 +131,15 @@ def fast_scan():
 	global site
 	# fast or default scan nmap
 	if site[:7] == "http://":
-		os.system(f"gnome-terminal -e 'bash -c \"nmap {site[7:]}; exec bash\"'")
+		if site[len(site)-1] == "/":
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[7:-1]}; exec bash\"'")
+		else:
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[7:]}; exec bash\"'")
 	elif site[:8] == "https://":
-		os.system(f"gnome-terminal -e 'bash -c \"nmap {site[8:]}; exec bash\"'")
+		if site[len(site)-1] == "/":
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[8:-1]}; exec bash\"'")
+		else:
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[8:]}; exec bash\"'")
 	else:
 		os.system(f"gnome-terminal -e 'bash -c \"nmap {site}; exec bash\"'")
 
@@ -136,7 +150,7 @@ def fast_scan():
 	os.system(f"gnome-terminal -e 'bash -c \"nikto -h '{site}'; exec bash\"'")
 
 	# start dirb 
-	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}'; exec bash\"'")
+	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
 
 	os.system("clear")
 	scanners()
@@ -165,7 +179,7 @@ def full_scan():
 	os.system(f"gnome-terminal -e 'bash -c \"nikto -h '{site}' -C all; exec bash\"'")
 
 	# start dirb
-	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt; exec bash\"'")
+	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
 
 	os.system("clear")
 	scanners()
@@ -197,10 +211,10 @@ def dirb_web_scan():
 		os.system("clear")
 		scanners()
 	elif choice == 1:
-		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}'; exec bash\"'")
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
 		os.system("clear")
 	elif choice == 2:
-		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt; exec bash\"'")
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
 		os.system("clear")
 
 
