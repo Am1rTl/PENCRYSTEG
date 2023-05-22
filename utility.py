@@ -19,7 +19,7 @@ def req():
 	os.system("sudo apt install burpsuite")
 	os.system("sudo apt install chromium")
 	os.system("sudo apt install dirb")
-	os.system("	")
+	os.system("sudo apt install openvas")
 
 	os.system("sudo apt autoremove")
 
