@@ -1,7 +1,10 @@
 os.system("gnome-terminal -e 'bash -c \"dirb; exec bash\"'")
 for open new terminal with work command
 
-
+	WPScan
+	Masscan
+	PureDNS
+	httpx
 
     Nmap
     Nikto

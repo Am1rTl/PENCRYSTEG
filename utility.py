@@ -19,7 +19,7 @@ def req():
 	os.system("sudo apt install burpsuite")
 	os.system("sudo apt install chromium")
 	os.system("sudo apt install dirb")
-	os.system("sudo apt install openvas")
+	os.system("	")
 
 	os.system("sudo apt autoremove")
 
@@ -147,10 +147,14 @@ def fast_scan():
 	os.system(f"gnome-terminal -e 'bash -c \"nmap --script vuln {site}; exec bash\"'")
 
 	# start nikto 
-	os.system(f"gnome-terminal -e 'bash -c \"nikto -h '{site}'; exec bash\"'")
+	os.system(f"gnome-terminal -e 'bash -c \"nikto -h {site}; exec bash\"'")
 
 	# start dirb 
-	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
+	if site[len(site)-1] == '/':
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f ; exec bash\"'")
+	else:
+		tmp_site = site+'/'
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{tmp_site}' -f ; exec bash\"'")
 
 	os.system("clear")
 	scanners()
@@ -176,16 +180,21 @@ def full_scan():
 		os.system(f"gnome-terminal -e 'bash -c \"nmap -p- {site}; exec bash\"'")
 
 	# start nikto
-	os.system(f"gnome-terminal -e 'bash -c \"nikto -h '{site}' -C all; exec bash\"'")
+	os.system(f"gnome-terminal -e 'bash -c \"nikto -h {site} -C all; exec bash\"'")
 
 	# start dirb
-	os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
+	if site[len(site)-1] == '/':
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f -t 100; exec bash\"'")
+	else:
+		tmp_site = site+'/'
+		os.system(f"gnome-terminal -e 'bash -c \"dirb '{tmp_site}' -t 100 /usr/share/dirb/wordlists/big.txt -f -t 100; exec bash\"'")
 
 	os.system("clear")
 	scanners()
 
 def dirb_web_scan():
 	global site
+	wordlist = ""
 	os.system("clear")
 	print("WEB   Scan site Dirb")
 	print("")
@@ -195,19 +204,20 @@ def dirb_web_scan():
 	print("")
 	print("   1) Fast scan")
 	print("   2) Full scan")
-	print("   3) Exit")
+	print("   3) Use my wordlist")
+	print("   4) Exit")
 	print("")
 	choice = input("PENCRYSTEG> ")
 	try:
 		choice = int(choice)
-		if choice >= 1 and choice <= 3 :
+		if choice >= 1 and choice <= 4 :
 			pass
 		else:
 			raise "Error"
 	except:
 		os.system("clear")
 		scanners()
-	if choice == 3:
+	if choice == 4:
 		os.system("clear")
 		scanners()
 	elif choice == 1:
@@ -216,6 +226,24 @@ def dirb_web_scan():
 	elif choice == 2:
 		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
 		os.system("clear")
+	elif choice == 3:
+		os.system("clear")
+		print()
+		wordlist = input("Enter path to wordlist: ")
+		print()	
+		try:
+			open(wordlist)
+			os.system(f"gnome-terminal -e 'bash -c \"dirb {site} {wordlist} -f; exec bash\"'")
+			os.system("clear")
+		except:
+			print()
+			print("Wordlist not found")
+			print()
+			os.system("sleep 3")
+			os.system("clear")
+			scanners()
+
+		
 
 
 def scanners():
