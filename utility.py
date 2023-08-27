@@ -202,7 +202,7 @@ def full_scan():
 def dirb_web_scan():
 	global site
     if site[:8] == "https://" or site[:7] == "http://":
-        wordlist = ""
+            wordlist = ""
 	    os.system("clear")
 	    print("WEB   Scan site Dirb")
 	    print("")
