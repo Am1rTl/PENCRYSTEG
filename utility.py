@@ -1,5 +1,6 @@
 import os
 import random
+import requests
 
 def req():
 	os.system("sudo apt update")
@@ -10,10 +11,12 @@ def req():
 
 
 	os.system("pip install random2")
+	
 	os.system("sudo apt install git")
 	os.system("git clone https://github.com/s0md3v/XSStrike.git")
 	os.system("cd XSStrike")
 	os.system("pip3 install -r XSStrike/requirements.txt")
+	
 	os.system("sudo apt install nikto")
 	os.system("sudo apt install nmap")
 	os.system("sudo apt install burpsuite")
@@ -131,6 +134,7 @@ def fast_scan():
 	global site
 	# fast or default scan nmap
 	if site[:7] == "http://":
+		print(site[:7].split(':'))
 		if site[len(site)-1] == "/":
 			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[7:-1]}; exec bash\"'")
 		else:
@@ -141,7 +145,10 @@ def fast_scan():
 		else:
 			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[8:]}; exec bash\"'")
 	else:
-		os.system(f"gnome-terminal -e 'bash -c \"nmap {site}; exec bash\"'")
+		if site[len(site)-1] == "/":
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site[:-1]}; exec bash\"'")
+		else:
+			os.system(f"gnome-terminal -e 'bash -c \"nmap {site}; exec bash\"'")
 
 	#scan vuln
 	os.system(f"gnome-terminal -e 'bash -c \"nmap --script vuln {site}; exec bash\"'")
@@ -194,54 +201,61 @@ def full_scan():
 
 def dirb_web_scan():
 	global site
-	wordlist = ""
-	os.system("clear")
-	print("WEB   Scan site Dirb")
-	print("")
-	print(f"Target: {site}")
-	print("")
-	print(" Select from menu:")
-	print("")
-	print("   1) Fast scan")
-	print("   2) Full scan")
-	print("   3) Use my wordlist")
-	print("   4) Exit")
-	print("")
-	choice = input("PENCRYSTEG> ")
-	try:
-		choice = int(choice)
-		if choice >= 1 and choice <= 4 :
-			pass
-		else:
-			raise "Error"
-	except:
-		os.system("clear")
-		scanners()
-	if choice == 4:
-		os.system("clear")
-		scanners()
-	elif choice == 1:
-		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
-		os.system("clear")
-	elif choice == 2:
-		os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
-		os.system("clear")
-	elif choice == 3:
-		os.system("clear")
-		print()
-		wordlist = input("Enter path to wordlist: ")
-		print()	
-		try:
-			open(wordlist)
-			os.system(f"gnome-terminal -e 'bash -c \"dirb {site} {wordlist} -f; exec bash\"'")
-			os.system("clear")
-		except:
-			print()
-			print("Wordlist not found")
-			print()
-			os.system("sleep 3")
-			os.system("clear")
-			scanners()
+    if site[:8] == "https://" or site[:7] == "http://":
+        wordlist = ""
+	    os.system("clear")
+	    print("WEB   Scan site Dirb")
+	    print("")
+	    print(f"Target: {site}")
+	    print("")
+	    print(" Select from menu:")
+	    print("")
+	    print("   1) Fast scan")
+	    print("   2) Full scan")
+	    print("   3) Use my wordlist")
+	    print("   4) Exit")
+	    print("")
+	    choice = input("PENCRYSTEG> ")
+	    try:
+		    choice = int(choice)
+		    if choice >= 1 and choice <= 4 :
+			    pass
+		    else:
+			    raise "Error"
+	    except:
+		    os.system("clear")
+		    scanners()
+	    if choice == 4:
+		    os.system("clear")
+		    scanners()
+	    elif choice == 1:
+		    os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
+		    os.system("clear")
+	    elif choice == 2:
+		    os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
+		    os.system("clear")
+	    elif choice == 3:
+		    os.system("clear")
+		    print()
+		    wordlist = input("Enter path to wordlist: ")
+		    print()	
+		    try:
+			    open(wordlist)
+			    os.system(f"gnome-terminal -e 'bash -c \"dirb {site} {wordlist} -f; exec bash\"'")
+			    os.system("clear")
+		    except:
+			    print()
+			    print("Wordlist not found")
+			    print()
+			    os.system("sleep 3")
+			    os.system("clear")
+			    scanners()
+    else:
+        os.system("clear")
+        print("Please enter the target so that it starts with http:// or https://")
+        print("For example http://target.com")
+        os.system("sleep 2")
+        os.system("clear")
 
 		
 
@@ -295,6 +309,7 @@ def nmap():
 	print("")
 	print("")
 	# Надо доделать
+	os.system("clear")
 
 def WEB():
 	# Основное меню с функциями для пентеста
@@ -306,7 +321,7 @@ def WEB():
 	print("")
 	print(" Select from menu:")
 	print("")
-	print("   0) Choice site")
+	print("   0) Choice target")
 	print("   1) Scan site")
 	print("   2) SQL attack")
 	print("   3) XSS attack")
