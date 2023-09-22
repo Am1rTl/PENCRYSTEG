@@ -23,6 +23,8 @@ def req():
 	os.system("sudo apt install chromium")
 	os.system("sudo apt install dirb")
 	os.system("sudo apt install openvas")
+	os.system("sudo apt-get -y install gem)
+	os.system("sudo gem install haiti-hash")
 
 	os.system("sudo apt autoremove")
 
@@ -200,62 +202,63 @@ def full_scan():
 	scanners()
 
 def dirb_web_scan():
-	global site
+    global site
     if site[:8] == "https://" or site[:7] == "http://":
-            wordlist = ""
-	    os.system("clear")
-	    print("WEB   Scan site Dirb")
-	    print("")
-	    print(f"Target: {site}")
-	    print("")
-	    print(" Select from menu:")
-	    print("")
-	    print("   1) Fast scan")
-	    print("   2) Full scan")
-	    print("   3) Use my wordlist")
-	    print("   4) Exit")
-	    print("")
-	    choice = input("PENCRYSTEG> ")
-	    try:
-		    choice = int(choice)
-		    if choice >= 1 and choice <= 4 :
-			    pass
-		    else:
-			    raise "Error"
-	    except:
-		    os.system("clear")
-		    scanners()
-	    if choice == 4:
-		    os.system("clear")
-		    scanners()
-	    elif choice == 1:
-		    os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
-		    os.system("clear")
-	    elif choice == 2:
-		    os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
-		    os.system("clear")
-	    elif choice == 3:
-		    os.system("clear")
-		    print()
-		    wordlist = input("Enter path to wordlist: ")
-		    print()	
-		    try:
-			    open(wordlist)
-			    os.system(f"gnome-terminal -e 'bash -c \"dirb {site} {wordlist} -f; exec bash\"'")
-			    os.system("clear")
-		    except:
-			    print()
-			    print("Wordlist not found")
-			    print()
-			    os.system("sleep 3")
-			    os.system("clear")
-			    scanners()
+        wordlist = ""
+        os.system("clear")
+        print("WEB   Scan site Dirb")
+        print("")
+        print(f"Target: {site}")
+        print("")
+        print(" Select from menu:")
+        print("")
+        print("   1) Fast scan")
+        print("   2) Full scan")
+        print("   3) Use my wordlist")
+        print("   4) Exit")
+        print("")
+        choice = input("PENCRYSTEG> ")
+        try:
+            choice = int(choice)
+            if choice >= 1 and choice <= 4 :
+                pass
+            else:
+                raise "Error"
+        except:
+            os.system("clear")
+            scanners()
+        if choice == 4:
+            os.system("clear")
+            scanners()
+        elif choice == 1:
+            os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' -f; exec bash\"'")
+            os.system("clear")
+        elif choice == 2:
+            os.system(f"gnome-terminal -e 'bash -c \"dirb '{site}' /usr/share/dirb/wordlists/big.txt -f; exec bash\"'")
+            os.system("clear")
+        elif choice == 3:
+            os.system("clear")
+            print()
+            wordlist = input("Enter path to wordlist: ")
+            print()    
+            try:
+                open(wordlist)
+                os.system(f"gnome-terminal -e 'bash -c \"dirb {site} {wordlist} -f; exec bash\"'")
+                os.system("clear")
+            except:
+                print()
+                print("Wordlist not found")
+                print()
+                os.system("sleep 3")
+                os.system("clear")
+                scanners()
     else:
         os.system("clear")
         print("Please enter the target so that it starts with http:// or https://")
         print("For example http://target.com")
         os.system("sleep 2")
         os.system("clear")
+
 
 		
 

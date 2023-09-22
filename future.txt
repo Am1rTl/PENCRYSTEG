@@ -35,4 +35,5 @@ Osint:
 	DetectDee
 	https://github.com/wddadk/OSINT-Tools
 
-
+Hash:
+	Add utility haiti-hash https://github.com/noraj/haiti
