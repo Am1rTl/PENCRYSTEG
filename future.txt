@@ -37,3 +37,5 @@ Osint:
 
 Cripto Hash:
 	Add utility haiti-hash https://github.com/noraj/haiti
+	Hashcat
+	John The Ripper
