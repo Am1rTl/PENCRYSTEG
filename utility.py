@@ -2,31 +2,79 @@ import os
 import random
 import requests
 
-def req():
+import platform
+import subprocess
+
+def get_package_manager():
+    system_type = platform.system().lower()
+
+    if system_type == "linux":
+        # Проверяем наличие утилит APT и Pacman
+        apt_exists = subprocess.run(["which", "apt-get"], stdout=subprocess.PIPE).returncode == 0
+        pacman_exists = subprocess.run(["which", "pacman"], stdout=subprocess.PIPE).returncode == 0
+
+        if apt_exists:
+            return "APT"
+        elif pacman_exists:
+            return "Pacman"
+        else:
+            return "Не удалось определить менеджер пакетов"
+    else:
+        return "Не Linux система"
+
+
+def install_req_apt():
 	os.system("sudo apt update")
 	os.system("sudo apt upgrage")
 	os.system("sudo apt-get update")
-
 	os.system("sudo apt-get dist-upgrade")
 
-
-	os.system("pip install random2")
-	
 	os.system("sudo apt install git")
 	os.system("git clone https://github.com/s0md3v/XSStrike.git")
 	os.system("cd XSStrike")
 	os.system("pip3 install -r XSStrike/requirements.txt")
-	
+
 	os.system("sudo apt install nikto")
 	os.system("sudo apt install nmap")
 	os.system("sudo apt install burpsuite")
 	os.system("sudo apt install chromium")
 	os.system("sudo apt install dirb")
 	os.system("sudo apt install openvas")
-	os.system("sudo apt-get -y install gem)
+	os.system("sudo apt-get -y install gem")
 	os.system("sudo gem install haiti-hash")
-
 	os.system("sudo apt autoremove")
+
+def install_req_pacman():
+	os.system("sudo pacman -Syyu")
+	os.system("sudo pacman -S git")
+
+	os.system("git clone https://github.com/s0md3v/XSStrike.git")
+	os.system("cd XSStrike")
+	os.system("pip install -r XSStrike/requirements.txt")
+
+	os.system("sudo pacman -S nikto")
+	os.system("sudo pacman -S nmap")
+	os.system("sudo yay -S --noconfirm burpsuite")
+	os.system("sudo pacman -S  chromium")
+	os.system("sudo yay -S --noconfirm dirb ")
+
+def req():
+	os.system("pip install pip-custom-platform")
+	os.system("pip install random2")
+	os.system("pip install subprocess.run")
+
+	if get_package_manager() == "APT":
+		install_req_apt()
+	elif get_package_manager() == "Pacman":
+		install_req_pacman()
+	else:
+		print("Не удалось определить менеджер пакетов")
+
+
+
+
+
+
 
 def start():
 	print(" Select from menu:")
