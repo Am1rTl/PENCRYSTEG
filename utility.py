@@ -47,15 +47,14 @@ def install_req_apt():
 	os.system("sudo apt autoremove")
 
 def install_req_pacman():
-	os.system("sudo pacman -Syyu")
-	os.system("sudo pacman -S git nikto chromium nmap")
+	os.system("sudo pacman -Syyu --noconfirm")
+	os.system("sudo pacman -S git nikto chromium nmap --noconfirm")
 
 	os.system("git clone https://github.com/s0md3v/XSStrike.git")
 	os.system("cd XSStrike")
 	os.system("pip install -r XSStrike/requirements.txt")
 
 	os.system("yay -S --noconfirm burpsuite dirb")
-	os.system("yay -S --noconfirm dirb ")
 
 def req():
 	os.system("pip install pip-custom-platform")
