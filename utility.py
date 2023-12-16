@@ -57,9 +57,9 @@ def install_req_pacman():
 	os.system("yay -S --noconfirm burpsuite dirb")
 
 def req():
-	os.system("pip install pip-custom-platform")
-	os.system("pip install random2")
-	os.system("pip install subprocess.run")
+	#os.system("pip install pip-custom-platform")
+	#os.system("pip install random2")
+	#os.system("pip install subprocess.run")
 
 	if get_package_manager() == "APT":
 		install_req_apt()
@@ -67,6 +67,7 @@ def req():
 		install_req_pacman()
 	else:
 		print("Не удалось определить менеджер пакетов")
+		break
 
 
 
